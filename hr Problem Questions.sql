@@ -5,14 +5,14 @@ SELECT * FROM hr LIMIT 5;
 -- 1. What is the gender breakdown of employees in the company?
 SELECT gender, COUNT(*) AS number
 FROM hr
-WHERE termdate is null
+WHERE termdate is null or termdate >= curdate()
 GROUP BY gender;
 
 
 -- 2. What is the race/ethnicity breakdown of employees in the company?
 SELECT race, COUNT(*) AS number
 FROM hr
-WHERE termdate is null
+WHERE termdate is null or termdate >= curdate()
 GROUP BY race
 ORDER BY number DESC;
 
@@ -22,7 +22,7 @@ SELECT
   MIN(age) AS youngest,
   MAX(age) AS oldest
 FROM hr
-WHERE termdate is null;
+WHERE termdate is null or termdate >= curdate();
 
 SELECT 
   CASE 
@@ -35,7 +35,7 @@ SELECT
 FROM 
   hr
 WHERE 
-  termdate is null
+  termdate is null or termdate >= curdate()
 GROUP BY age_group
 ORDER BY age_group;
 
@@ -43,7 +43,7 @@ ORDER BY age_group;
 -- 4. How many employees work at headquarters versus remote locations?
 SELECT location, COUNT(*) as count
 FROM hr
-WHERE termdate is null
+WHERE termdate is null or termdate >= curdate()
 GROUP BY location;
 
 
@@ -56,7 +56,7 @@ WHERE termdate is not null AND termdate <= CURDATE();
 -- 6. How does the gender distribution vary across departments and job titles?
 SELECT department, gender, COUNT(*) as number
 FROM hr
-WHERE termdate is null
+WHERE termdate is null or termdate >= curdate()
 GROUP BY department, gender
 ORDER BY department;
 
@@ -64,7 +64,7 @@ ORDER BY department;
 -- 7. What is the distribution of job titles across the company?
 SELECT jobtitle, COUNT(*) as number
 FROM hr
-WHERE termdate is null
+WHERE termdate is null or termdate >= curdate()
 GROUP BY jobtitle
 ORDER BY jobtitle DESC;
 
@@ -82,7 +82,7 @@ ORDER BY "termination_rate(%)" DESC;
 -- 9. What is the distribution of employees across locations by city and state?
 SELECT location_state, COUNT(*) as number
 FROM hr
-WHERE termdate is null
+WHERE termdate is null or termdate >= curdate()
 GROUP BY location_state
 ORDER BY number DESC;
 
